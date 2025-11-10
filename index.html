@@ -1,128 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="--scale:1">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Fairness, Accountability & Diversity Assessment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Fairness, Accountability & Diversity – Expo Poster</title>
 <style>
-  /* ==== Color palette (やり過ぎないプロ向け) ==== */
+  /* =============================================
+     Clean Expo Poster – screen & print ready
+     - Single HTML file
+     - A3/A4 print styles
+     - Strong typographic hierarchy
+     - QR clear, non-overlapping
+     ============================================= */
+
+  /* ===== Color System (professional, calm) ===== */
   :root{
-    --bg:#fafafa;           /* 背景ほんのりグレー */
-    --fg:#0f172a;           /* 見出し・本文の濃紺系 */
-    --muted:#64748b;        /* 補助テキスト */
-    --rule:#e5e7eb;         /* 仕切り線 */
-    --accent:#155EEF;       /* リンク色（深めの青） */
+    --bg:#0b0f1a;              /* page background (outer) */
+    --paper:#ffffff;            /* poster canvas */
+    --ink:#0f172a;              /* main text */
+    --muted:#5b6b85;           /* secondary text */
+    --rule:#e5e7eb;            /* hairlines */
+    --accent:#155EEF;          /* action/links */
+    --accent-2:#6EE7F9;        /* soft cyan accent */
+    --chip:#0b60ff10;          /* soft chip background */
   }
 
+  /* ===== Base ===== */
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-    line-height:1.28;
-  }
-  .wrap{max-width:1200px; margin:40px auto; padding:0 28px}
+  body{margin:0; background:var(--bg);}
 
-  /* ==== Header: タイトルとQRをFlexで並べる ==== */
-  .header{
-    display:flex; align-items:flex-start; justify-content:space-between;
-    gap:24px; margin-bottom:12px;
-  }
-  h1{
-    margin:0; font-size:min(5.6vmin,52px); font-weight:900; letter-spacing:.2px;
+  /* Outer frame mimics a mounted poster on a table */
+  .frame{
+    min-height:100svh; display:grid; place-items:center;
+    padding:24px; /* breathing room on small screens */
+    background:
+      radial-gradient(1200px 600px at 20% 0%, #0e1424 0%, transparent 60%),
+      radial-gradient(1000px 800px at 100% 100%, #0a1430 0%, transparent 60%),
+      var(--bg);
   }
 
-  /* QRはstatic配置（重ならない）。枠は控えめに */
-  .qr{
-    width:min(16vmin,150px); aspect-ratio:1/1;
-    border:2px solid #111; border-radius:12px; overflow:hidden; background:#fff;
-    box-shadow:0 4px 14px rgba(0,0,0,.08);
-    flex:0 0 auto;
+  /* Poster canvas */
+  .poster{
+    width:min(1080px, 92vw); /* ~A3 width on laptop */
+    background:linear-gradient(180deg, #ffffff, #fbfdff);
+    color:var(--ink);
+    border-radius:28px;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,.25),
+      0 2px 0 rgba(0,0,0,.04) inset;
+    padding:48px 52px 40px;
+    position:relative;
+    overflow:hidden;
   }
+
+  /* Accent ribbon */
+  .ribbon{
+    position:absolute; inset:0 auto auto 0;
+    width:60%; height:10px; border-radius:0 12px 12px 0;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+
+  /* Header: Title + QR column layout */
+  .head{
+    display:grid; grid-template-columns:1.2fr .9fr; gap:28px; align-items:start;
+  }
+
+  .title-block h1{
+    margin:0 0 10px 0;
+    font-size:clamp(28px, 5.8vmin, 56px);
+    line-height:1.04;
+    letter-spacing:0.2px;
+    font-weight:900;
+  }
+  .subtitle{color:var(--muted); font-size:clamp(14px, 2.2vmin, 18px)}
+
+  /* Meta chips */
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .chip{
+    padding:8px 12px; border-radius:999px; border:1px solid var(--rule);
+    background:var(--chip); font-weight:700; font-size:14px;
+    display:inline-flex; gap:8px; align-items:center;
+  }
+  .chip i{font-style:normal; opacity:.6}
+
+  /* QR card */
+  .qr-card{
+    display:grid; grid-template-columns:120px 1fr; gap:16px; align-items:center;
+    border:1px solid var(--rule); border-radius:16px; padding:14px 16px;
+    background:#fff; box-shadow:0 6px 18px rgba(10,20,40,.06);
+  }
+  .qr{width:120px; aspect-ratio:1/1; border-radius:12px; overflow:hidden; border:2px solid #111; background:#fff}
   .qr img{width:100%; height:100%; object-fit:contain}
+  .qr-meta b{display:block; font-size:15px; margin-bottom:4px}
+  .qr-meta a{color:var(--accent); font-weight:800; text-decoration:none}
+  .qr-meta a:hover{text-decoration:underline}
 
-  .meta{
-    margin:2px 0 26px; color:var(--muted); font-weight:600;
-    font-size:min(2.6vmin,22px);
+  /* Divider */
+  .rule{height:1px; background:var(--rule); margin:26px 0}
+
+  /* Two-column content grid */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+  .card{
+    border:1px solid var(--rule); border-radius:18px; background:#fff;
+    padding:18px 18px 10px; box-shadow:0 8px 22px rgba(10,20,40,.05);
   }
-
-  .grid{
-    display:grid; grid-template-columns:1fr 1fr;
-    gap:28px; align-items:start;
-  }
-  .col + .col{border-left:1px solid var(--rule); padding-left:26px}
-
-  h2{margin:18px 0 8px; font-size:min(3.2vmin,28px); font-weight:800}
-  ul{margin:0 0 12px 1.1em; padding:0; font-size:min(2.7vmin,21px)}
+  h2{margin:0 0 8px; font-size:clamp(18px, 2.7vmin, 24px); font-weight:800}
+  ul{margin:0; padding:0 0 0 1.1em; font-size:clamp(14px, 2.4vmin, 18px)}
   li{margin:8px 0}
   li::marker{font-weight:900}
 
-  .link{margin-top:8px; font-size:min(2.6vmin,22px)}
-  .link a{color:var(--accent); text-decoration:none; font-weight:800}
-  .link a:hover{text-decoration:underline}
+  /* Right column stacks */
+  .stack{display:grid; gap:18px}
 
-  /* モバイルや狭い画面では縦積み */
-  @media (max-width:900px){
+  /* Footer stamp */
+  .footer{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    margin-top:22px; color:#475569; font-size:14px;
+  }
+  .badge{
+    padding:8px 12px; border:1px dashed var(--rule); border-radius:10px; background:#fafafa; font-weight:700
+  }
+
+  /* ===== Print (A3/A4) ===== */
+  @media print{
+    :root{--bg:#ffffff}
+    body{background:transparent}
+    .frame{padding:0; background:#fff}
+    .poster{box-shadow:none; border:1px solid #ddd; border-radius:0; width:100%; padding:28mm 24mm}
+    .ribbon{height:6mm}
+    .qr-card{grid-template-columns:30mm 1fr}
+    .qr{width:30mm}
+    .title-block h1{font-size:26pt}
+    .subtitle{font-size:11pt}
+    h2{font-size:14pt}
+    ul{font-size:11.5pt}
+    .badge{border-style:solid}
+    a{color:#0b51ff; text-decoration:none}
+    /* avoid page breaks inside cards */
+    .card{break-inside:avoid}
+  }
+
+  /* ===== Mobile narrow ===== */
+  @media (max-width:860px){
+    .head{grid-template-columns:1fr}
+    .qr-card{grid-template-columns:96px 1fr}
+    .qr{width:96px}
     .grid{grid-template-columns:1fr}
-    .col + .col{border-left:none; padding-left:0}
-    .header{align-items:center}
-    .qr{width:140px}
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="header">
-      <h1>AI Fairness, Accountability &amp; Diversity Assessment</h1>
-      <div class="qr">
-        <img src="qr_takeru_linkedin.png" alt="LinkedIn QR (Takeru Sonoda)">
-      </div>
-    </div>
+  <div class="frame">
+    <article class="poster" role="document" aria-label="Expo Poster">
+      <div class="ribbon" aria-hidden="true"></div>
 
-    <p class="meta">
-      Presenter: <strong>Takeru Sonoda</strong> &nbsp;•&nbsp;
-      Team: <strong>Team 5</strong> &nbsp;•&nbsp; Expo 2025
-    </p>
+      <header class="head">
+        <div class="title-block">
+          <h1>AI Fairness, Accountability &amp; Diversity Assessment</h1>
+          <p class="subtitle">Business Technology &amp; Entrepreneurship – Industry Project Expo</p>
 
-    <div class="grid">
-      <section class="col">
-        <h2>My Contribution</h2>
-        <ul>
-          <li>Designed analytical models</li>
-          <li>Structured risk identification logic</li>
-          <li>Built DEI-focused assessment flow</li>
-        </ul>
+          <div class="chips" aria-label="Presenter and Team">
+            <span class="chip"><i>Presenter</i> Takeru Sonoda</span>
+            <span class="chip"><i>Team</i> TechDiversity AI Working Group</span>
+          </div>
+        </div>
 
-        <h2>Problem</h2>
-        <ul>
-          <li>Hard to detect fairness/accountability risks in real AI use</li>
-          <li>ISO 42005/42001 leave gaps on inclusion &amp; transparency</li>
-        </ul>
+        <aside class="qr-card" aria-label="Contact">
+          <div class="qr">
+            <!-- Replace the src with your generated high-res PNG (at least 1024×1024) -->
+            <img src="qr_takeru_linkedin.png" alt="LinkedIn QR for Takeru Sonoda" />
+          </div>
+          <div class="qr-meta">
+            <b>Let’s connect</b>
+            <a href="https://www.linkedin.com/in/takeru-sonoda-aa5ab2285/" target="_blank" rel="noopener">linkedin.com/in/takeru-sonoda</a>
+            <div style="margin-top:6px; color:#64748b; font-size:13px">Scan to view profile &amp; project details</div>
+          </div>
+        </aside>
+      </header>
+
+      <div class="rule" aria-hidden="true"></div>
+
+      <section class="grid" aria-label="Content">
+        <div class="card">
+          <h2>My Contribution</h2>
+          <ul>
+            <li>Designed analytical models</li>
+            <li>Structured risk identification logic</li>
+            <li>Built DEI‑focused assessment flow</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <h2>Approach</h2>
+            <ul>
+              <li>Standards comparison (ISO 42005 / 42001)</li>
+              <li>Stakeholder Insight Map</li>
+              <li>Fairness &amp; Accountability Gap Model</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h2>Key Findings</h2>
+            <ul>
+              <li>Limited representation raises fairness risks</li>
+              <li>Unclear ownership creates accountability gaps</li>
+              <li>Diverse voices reveal overlooked scenarios</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Problem</h2>
+          <ul>
+            <li>Hard to detect fairness / accountability risks in real AI use</li>
+            <li>ISO 42005 / 42001 leave gaps on inclusion &amp; transparency</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Contact</h2>
+          <ul>
+            <li><strong>LinkedIn</strong>: linkedin.com/in/takeru-sonoda</li>
+            <li><strong>Email</strong>: takeru.sonoda@example.com</li>
+          </ul>
+        </div>
       </section>
 
-      <section class="col">
-        <h2>Approach</h2>
-        <ul>
-          <li>Standards comparison (ISO 42005/42001)</li>
-          <li>Stakeholder Insight Map</li>
-          <li>Fairness/Accountability Gap Model</li>
-        </ul>
-
-        <h2>Key Findings</h2>
-        <ul>
-          <li>Limited representation raises fairness risks</li>
-          <li>Unclear ownership creates accountability gaps</li>
-          <li>Diverse voices reveal overlooked scenarios</li>
-        </ul>
-
-        <p class="link">
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/takeru-sonoda-aa5ab2285/" target="_blank" rel="noopener">
-            linkedin.com/in/takeru-sonoda
-          </a>
-        </p>
-      </section>
-    </div>
+      <footer class="footer">
+        <span class="badge">Ready for A3/A4 print · High‑contrast &amp; QR‑safe layout</span>
+        <span>© Takeru Sonoda · 2025</span>
+      </footer>
+    </article>
   </div>
 </body>
 </html>
