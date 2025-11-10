@@ -5,49 +5,84 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Fairness, Accountability & Diversity Assessment</title>
 <style>
-  :root{--fg:#0b0b0b;--muted:#616161;--accent:#155EEF;--rule:#e7e7e7;--bg:#fff}
+  /* ==== Color palette (やり過ぎないプロ向け) ==== */
+  :root{
+    --bg:#fafafa;           /* 背景ほんのりグレー */
+    --fg:#0f172a;           /* 見出し・本文の濃紺系 */
+    --muted:#64748b;        /* 補助テキスト */
+    --rule:#e5e7eb;         /* 仕切り線 */
+    --accent:#155EEF;       /* リンク色（深めの青） */
+  }
+
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;background:var(--bg);color:var(--fg);
-    font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     line-height:1.28;
   }
-  .wrap{max-width:1200px;margin:40px auto;padding:0 28px;position:relative}
-  /* 視線誘導：QRは一段弱く、小さめ右上固定 */
-  .qr{
-    position:absolute;top:22px;right:22px;width:min(16vmin,150px);aspect-ratio:1/1;
-    border:2px solid #000;border-radius:12px;overflow:hidden;background:#fff;
-    box-shadow:0 4px 14px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;
+  .wrap{max-width:1200px; margin:40px auto; padding:0 28px}
+
+  /* ==== Header: タイトルとQRをFlexで並べる ==== */
+  .header{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    gap:24px; margin-bottom:12px;
   }
-  .qr img{width:100%;height:100%;object-fit:contain}
-  /* タイポグラフィ */
-  h1{margin:0 0 6px;font-size:min(5.2vmin,48px);font-weight:900;letter-spacing:.2px}
-  .meta{margin:0 0 24px;color:var(--muted);font-weight:600;font-size:min(2.6vmin,22px)}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
-  .col{padding-right:14px}
-  .col + .col{border-left:1px solid var(--rule);padding-left:26px}
-  h2{margin:20px 0 8px;font-size:min(3.1vmin,26px);font-weight:800}
-  ul{margin:0 0 14px 1.1em;padding:0;font-size:min(2.7vmin,21px)}
+  h1{
+    margin:0; font-size:min(5.6vmin,52px); font-weight:900; letter-spacing:.2px;
+  }
+
+  /* QRはstatic配置（重ならない）。枠は控えめに */
+  .qr{
+    width:min(16vmin,150px); aspect-ratio:1/1;
+    border:2px solid #111; border-radius:12px; overflow:hidden; background:#fff;
+    box-shadow:0 4px 14px rgba(0,0,0,.08);
+    flex:0 0 auto;
+  }
+  .qr img{width:100%; height:100%; object-fit:contain}
+
+  .meta{
+    margin:2px 0 26px; color:var(--muted); font-weight:600;
+    font-size:min(2.6vmin,22px);
+  }
+
+  .grid{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:28px; align-items:start;
+  }
+  .col + .col{border-left:1px solid var(--rule); padding-left:26px}
+
+  h2{margin:18px 0 8px; font-size:min(3.2vmin,28px); font-weight:800}
+  ul{margin:0 0 12px 1.1em; padding:0; font-size:min(2.7vmin,21px)}
   li{margin:8px 0}
-  /* 箇条書きは終止記号なしで統一 */
   li::marker{font-weight:900}
-  .link{margin-top:18px;font-size:min(2.6vmin,22px)}
-  .link a{color:var(--accent);font-weight:800;text-decoration:none}
+
+  .link{margin-top:8px; font-size:min(2.6vmin,22px)}
+  .link a{color:var(--accent); text-decoration:none; font-weight:800}
   .link a:hover{text-decoration:underline}
+
+  /* モバイルや狭い画面では縦積み */
   @media (max-width:900px){
     .grid{grid-template-columns:1fr}
-    .col + .col{border-left:none;padding-left:0}
-    .qr{position:static;width:140px;margin:8px 0 0 auto}
+    .col + .col{border-left:none; padding-left:0}
+    .header{align-items:center}
+    .qr{width:140px}
   }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="qr"><img src="qr_takeru_linkedin.png" alt="LinkedIn QR (Takeru Sonoda)"></div>
+    <div class="header">
+      <h1>AI Fairness, Accountability &amp; Diversity Assessment</h1>
+      <div class="qr">
+        <img src="qr_takeru_linkedin.png" alt="LinkedIn QR (Takeru Sonoda)">
+      </div>
+    </div>
 
-    <h1>AI Fairness, Accountability &amp; Diversity Assessment</h1>
-    <p class="meta">Presenter: <strong>Takeru Sonoda</strong> &nbsp;•&nbsp; Team: <strong>Team 5</strong> &nbsp;•&nbsp; Expo 2025</p>
+    <p class="meta">
+      Presenter: <strong>Takeru Sonoda</strong> &nbsp;•&nbsp;
+      Team: <strong>Team 5</strong> &nbsp;•&nbsp; Expo 2025
+    </p>
 
     <div class="grid">
       <section class="col">
@@ -80,10 +115,14 @@
           <li>Diverse voices reveal overlooked scenarios</li>
         </ul>
 
-        <p class="link">LinkedIn: <a href="https://www.linkedin.com/in/takeru-sonoda-aa5ab2285/" target="_blank" rel="noopener">linkedin.com/in/takeru-sonoda</a></p>
+        <p class="link">
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/takeru-sonoda-aa5ab2285/" target="_blank" rel="noopener">
+            linkedin.com/in/takeru-sonoda
+          </a>
+        </p>
       </section>
     </div>
   </div>
 </body>
 </html>
-
