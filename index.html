@@ -101,7 +101,12 @@
   .rule{height:1px; background:var(--rule); margin:26px 0}
 
   /* Two-column content grid */
-  .grid{grid-template-columns:1.1fr .9fr; gap:22px}
+  .grid{
+    display:grid;               
+    grid-template-columns:1.1fr .9fr;
+    gap:22px;
+    align-items:start;
+  }
   .card{
     border:1px solid var(--rule); border-radius:18px; background:#fff;
     padding:14px 16px 8px; box-shadow:0 8px 22px rgba(10,20,40,.05);
