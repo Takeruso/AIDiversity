@@ -148,11 +148,27 @@
   }
 
   /* ===== Mobile narrow ===== */
-  @media (max-width:860px){
-    .head{grid-template-columns:1fr}
-    .qr-card{grid-template-columns:96px 1fr}
-    .qr{width:96px}
-    .grid{grid-template-columns:1fr}
+  /* 480px以下を“QR最優先”に寄せる */
+  @media (max-width: 480px){
+    .poster{ padding: 20px 18px 18px; border-radius: 16px; }
+    .title-block h1{ font-size: clamp(22px, 7vw, 28px); }
+    .subtitle{ font-size: 13px; }
+
+    /* QRカード：全幅・大きめ・押しやすく */
+    .qr-card{ grid-template-columns: 88px 1fr; gap: 12px; padding: 12px; }
+    .qr{ width: 88px; border-width: 1.5px; }
+    .qr-meta a{ font-size: 15px; }
+    .qr-meta small{ font-size: 12px; }
+
+    /* 余白・影を抑えてスクロール短縮 */
+    .card{ padding: 12px 12px 6px; box-shadow: none; }
+    .grid{ grid-template-columns: 1fr; gap: 14px; }
+    .chips{ gap: 6px; }
+    .chip{ padding: 6px 10px; font-size: 12px; }
+
+    /* 飾り/補足は隠す */
+    .ribbon{ display: none; }
+    .footer, .badge{ display: none; }
   }
 </style>
 </head>
