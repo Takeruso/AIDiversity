@@ -127,6 +127,30 @@
   .badge{
     padding:8px 12px; border:1px dashed var(--rule); border-radius:10px; background:#fafafa; font-weight:700
   }
+  /* ==== Bottom (Poster Page) QR - small & unobtrusive ==== */
+  .bottom-qr{
+    display:flex; justify-content:flex-end; margin-top:12px;
+  }
+  .qr-card.mini{
+    grid-template-columns:96px 1fr; gap:12px; padding:12px;
+  }
+  .qr-card.mini .qr{ width:96px; border-width:2px; }
+  .qr-card.mini .qr-meta b{ font-size:14px; }
+  .qr-card.mini .qr-meta a{ font-size:14px; }
+
+  /* モバイルでは1カラム＆少し大きめにして押しやすく */
+  @media (max-width:480px){
+    .bottom-qr{ justify-content:stretch; }
+    .qr-card.mini{ grid-template-columns:88px 1fr; }
+    .qr-card.mini .qr{ width:88px; border-width:1.5px; }
+  }
+
+  /* 印刷時（A3/A4）も小さめで残す */
+  @media print{
+    .bottom-qr{ margin-top:8mm; }
+    .qr-card.mini{ grid-template-columns:25mm 1fr; }
+    .qr-card.mini .qr{ width:25mm; }
+  }
 
   /* ===== Print (A3/A4) ===== */
   @media print{
@@ -316,6 +340,21 @@
         </div>
       </div>
     </section>
+    <!-- Poster page (web version) QR -->
+    <div class="bottom-qr" aria-label="Project web page">
+      <aside class="qr-card mini">
+        <!-- ここは “このページのURL” のQR画像に差し替え -->
+        <a class="qr" href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener"
+          aria-label="Open project poster web page">
+          <img src="qr_poster_page.png" alt="QR: Project poster web page">
+        </a>
+        <div class="qr-meta">
+          <b>View project details</b>
+          <a href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener">Open web poster</a>
+          <small>Slides &amp; models (online)</small>
+        </div>
+      </aside>
+    </div>
 
       <footer class="footer">
         <span class="badge">Ready for A3/A4 print · High‑contrast &amp; QR‑safe layout</span>
