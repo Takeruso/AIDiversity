@@ -128,11 +128,12 @@
     padding:8px 12px; border:1px dashed var(--rule); border-radius:10px; background:#fafafa; font-weight:700
   }
   /* ==== Bottom (Poster Page) QR - small & unobtrusive ==== */
-  .bottom-qr{
-    display:flex; justify-content:flex-end; margin-top:12px;
-  }
+  .bottom-qr{ display:block; margin-top:12px; }  
   .qr-card.mini{
-    grid-template-columns:96px 1fr; gap:12px; padding:12px;
+    width:100%;           
+    grid-template-columns:96px 1fr;
+    gap:12px;
+    padding:12px;
   }
   .qr-card.mini .qr{ width:96px; border-width:2px; }
   .qr-card.mini .qr-meta b{ font-size:14px; }
@@ -257,6 +258,7 @@
     .ribbon{ display: none; }
     .footer, .badge{ display: none; }
   }
+  @media screen { .badge{ display:none; } }
 
 </style>
 </head>
@@ -334,27 +336,26 @@
         <div class="card">
           <h2>Contact</h2>
           <ul>
-            <li><strong>LinkedIn</strong>: linkedin.com/in/takeru-sonoda-aa5ab2285/</li>
+            <li><strong>LinkedIn</strong>: https://www.linkedin.com/in/takeru-sonoda-aa5ab2285/</li>
             <li><strong>Email</strong>: 102784225@student.swin.edu.au</li>
           </ul>
         </div>
+
+        <div class="bottom-qr" aria-label="Project web page">
+          <aside class="qr-card mini">
+            <a class="qr" href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener"
+              aria-label="Open project poster web page">
+              <img src="qr_poster_page.png" alt="QR: Project poster web page">
+            </a>
+            <div class="qr-meta">
+              <b>View project details</b>
+              <a href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener">Open web poster</a>
+              <small>Slides &amp; models (online)</small>
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
-    <!-- Poster page (web version) QR -->
-    <div class="bottom-qr" aria-label="Project web page">
-      <aside class="qr-card mini">
-        <!-- ここは “このページのURL” のQR画像に差し替え -->
-        <a class="qr" href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener"
-          aria-label="Open project poster web page">
-          <img src="qr_poster_page.png" alt="QR: Project poster web page">
-        </a>
-        <div class="qr-meta">
-          <b>View project details</b>
-          <a href="https://takeruso.github.io/AIDiversity/" target="_blank" rel="noopener">Open web poster</a>
-          <small>Slides &amp; models (online)</small>
-        </div>
-      </aside>
-    </div>
 
       <footer class="footer">
         <span class="badge">Ready for A3/A4 print · High‑contrast &amp; QR‑safe layout</span>
